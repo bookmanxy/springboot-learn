@@ -5,27 +5,24 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.3.RELEASE</version>
+        <version>2.2.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.faceland</groupId>
-    <artifactId>springboot-learn-redis</artifactId>
+    <artifactId>springboot-kafka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>redis</name>
-    <description>springboot集成redis</description>
+    <name>springboot-kafka</name>
+    <description>学习及使用springboot集成kafka</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <modules>
-        <module>springboot-learn-redis-simple</module>
-        <module>springboot-learn-redis-lock</module>
-        <module>springboot-learn-redis-geo</module>
-        <module>springboot-learn-redis-rank</module>
+        <module>springboot-kafka-simple</module>
+        <module>springboot-kafka-kafkaadmin</module>
     </modules>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -62,10 +59,7 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -78,8 +72,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.30</version>
         </dependency>
-
-
+        <!--kafka专题-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -90,4 +87,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

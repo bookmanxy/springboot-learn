@@ -18,23 +18,23 @@ public interface IUserGeoService {
      * @param userInfos {@link UserInfo}
      * @return 成功保存的个数
      * */
-    Long saveCityInfoToRedis(Collection<UserInfo> userInfos);
+    Long saveUserInfoToRedis(Collection<UserInfo> userInfos);
 
     /**
      * <h2>获取给定用户的坐标</h2>
-     * @param cities 给定用户 key
+     * @param users 给定用户 key
      * @return {@link Point}s
      * */
-    List<Point> getCityPos(String[] cities);
+    List<Point> getUserPos(String[] users);
 
     /**
      * <h2>获取两个用户之间的距离</h2>
-     * @param city1 第一个用户
-     * @param city2 第二个用户
+     * @param user1 第一个用户
+     * @param user2 第二个用户
      * @param metric {@link Metric} 单位信息, 可以是 null
      * @return {@link Distance}
      * */
-    Distance getTwoCityDistance(String city1, String city2, Metric metric);
+    Distance getTwoUserDistance(String user1, String user2, Metric metric);
 
     /**
      * <h2>根据给定地理位置坐标获取指定范围内的地理位置集合</h2>
@@ -53,9 +53,16 @@ public interface IUserGeoService {
 
     /**
      * <h2>获取某个地理位置的 geohash 值</h2>
-     * @param cities 给定用户 key
-     * @return city geohashs
+     * @param users 给定用户 key
+     * @return user geohashs
      * */
-    List<String> getCityGeoHash(String[] cities);
+    List<String> getUserGeoHash(String[] users);
+
+    /**
+     * <h2>获取某个地理位置的 geohash 值</h2>
+     * @param user 给定用户 name
+     * @return 成功删除的个数
+     */
+    Long removeUserGeo(String user);
 }
 

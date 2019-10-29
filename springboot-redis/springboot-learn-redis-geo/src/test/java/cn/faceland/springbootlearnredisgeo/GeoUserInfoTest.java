@@ -28,65 +28,68 @@ import java.util.List;
 @SpringBootTest
 public class GeoUserInfoTest {
 
-    /** fake some cityInfos */
-    private List<UserInfo> cityInfos;
+    /** fake some userInfos */
+    private List<UserInfo> userInfos;
 
     @Autowired
     private IUserGeoService userGeoService;
 
     @Before
     public void init() {
-
-        cityInfos = new ArrayList<>();
-
-        cityInfos.add(new UserInfo("吕布", 117.17, 31.52));
-        cityInfos.add(new UserInfo("董卓", 117.02, 30.31));
-        cityInfos.add(new UserInfo("貂蝉", 116.47, 33.57));
-        cityInfos.add(new UserInfo("孙权", 116.58, 33.38));
-        cityInfos.add(new UserInfo("刘备", 115.48, 32.54));
-        cityInfos.add(new UserInfo("张飞", 117.21, 32.56));
-        cityInfos.add(new UserInfo("关羽", 118.18, 29.43));
+        userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo("吕布-晓城天地", 120.337869, 30.316137));
+        userInfos.add(new UserInfo("董卓-泰美国际", 120.323397, 30.315669));
+        userInfos.add(new UserInfo("貂蝉-天街", 120.332937, 30.315653));
+        userInfos.add(new UserInfo("孙权-四季风景苑", 120.354384, 30.308709));
+        userInfos.add(new UserInfo("刘备-金毅", 120.378548, 30.310267));
+        userInfos.add(new UserInfo("张飞-世茂江滨花园", 120.387873, 30.288627));
+        userInfos.add(new UserInfo("关羽-东港花苑", 120.279479, 30.438134));
     }
 
     /**
-     * <h2>测试 saveCityInfoToRedis 方法</h2>
+     * <h2>测试 saveUserInfoToRedis 方法</h2>
+     * 保存多个人的位置信息
      * */
     @Test
-    public void testSaveCityInfoToRedis() {
+    public void testSaveUserInfoToRedis() {
 
-        System.out.println(userGeoService.saveCityInfoToRedis(cityInfos));
+        System.out.println(userGeoService.saveUserInfoToRedis(userInfos));
     }
 
     /**
-     * <h2>测试 getCityPos 方法</h2>
-     * 如果传递的 city 在 Redis 中没有记录, 会返回什么呢 ? 例如, 这里传递的 xxx
+     * <h2>测试 getUserPos 方法</h2>
+     * 如果传递的 User 在 Redis 中没有记录, 会返回什么呢 ? 例如, 这里传递的 xxx
+     * 获取多个人的位置信息
      * */
     @Test
-    public void testGetCityPos() {
+    public void testGetUserPos() {
 
-        System.out.println(JSON.toJSONString(userGeoService.getCityPos(
-                Arrays.asList("anqing", "suzhou", "xxx").toArray(new String[3])
+        System.out.println(JSON.toJSONString(userGeoService.getUserPos(
+                Arrays.asList("吕布-晓城天地", "董卓-泰美国际", "xxx").toArray(new String[3])
         )));
     }
 
     /**
-     * <h2>测试 getTwoCityDistance 方法</h2>
+     * <h2>测试 getTwoUserDistance 方法</h2>
+     * 获取两个人
      * */
     @Test
-    public void testGetTwoCityDistance() {
+    public void testGetTwoUserDistance() {
 
-        System.out.println(userGeoService.getTwoCityDistance("anqing", "suzhou", null).getValue());
-        System.out.println(userGeoService.getTwoCityDistance("anqing", "suzhou", Metrics.KILOMETERS).getValue());
+        System.out.println(userGeoService.getTwoUserDistance("吕布-晓城天地", "貂蝉-天街", null).getValue() + " 米");
+        System.out.println(userGeoService.getTwoUserDistance("吕布-晓城天地", "貂蝉-天街", Metrics.KILOMETERS).getValue() + " 公里");
     }
 
     /**
      * <h2>测试 getPointRadius 方法</h2>
+     * 某个人附近的人
      * */
     @Test
     public void testGetPointRadius() {
-
-        Point center = new Point(cityInfos.get(0).getLongitude(), cityInfos.get(0).getLatitude());
-        Distance radius = new Distance(200, Metrics.KILOMETERS);
+        //吕布附近的人
+        Point center = new Point(userInfos.get(0).getLongitude(), userInfos.get(0).getLatitude());
+        //2公里范围内
+        Distance radius = new Distance(2, Metrics.KILOMETERS);
         Circle within = new Circle(center, radius);
 
         System.out.println(JSON.toJSONString(userGeoService.getPointRadius(within, null)));
@@ -105,22 +108,39 @@ public class GeoUserInfoTest {
 
         Distance radius = new Distance(200, Metrics.KILOMETERS);
 
-        System.out.println(JSON.toJSONString(userGeoService.getMemberRadius("suzhou", radius, null)));
+        System.out.println(JSON.toJSONString(userGeoService.getMemberRadius("吕布-晓城天地", radius, null)));
 
         // order by 距离 limit 2, 同时返回距离中心点的距离
         RedisGeoCommands.GeoRadiusCommandArgs args =
                 RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs().includeDistance().limit(2).sortAscending();
-        System.out.println(JSON.toJSONString(userGeoService.getMemberRadius("suzhou", radius, args)));
+        System.out.println(JSON.toJSONString(userGeoService.getMemberRadius("吕布-晓城天地", radius, args)));
     }
 
     /**
-     * <h2>测试 getCityGeoHash 方法</h2>
+     * <h2>测试 getUserGeoHash 方法</h2>
+     * 获取某个地理位置的 geohash 值
      * */
     @Test
-    public void testGetCityGeoHash() {
+    public void testGetUserGeoHash() {
 
-        System.out.println(JSON.toJSONString(userGeoService.getCityGeoHash(
-                Arrays.asList("anqing", "suzhou", "xxx").toArray(new String[3])
+        System.out.println(JSON.toJSONString(userGeoService.getUserGeoHash(
+                Arrays.asList("吕布-晓城天地", "suzhou", "xxx").toArray(new String[3])
+        )));
+    }
+    /**
+     * <h2>测试 testRemoveUserGeo 方法</h2>
+     * 根据姓名移除某个人的地理信息
+     * */
+    @Test
+    public void testRemoveUserGeo() {
+        System.out.println(JSON.toJSONString(userGeoService.getUserPos(
+                Arrays.asList("吕布-晓城天地", "董卓-泰美国际", "xxx").toArray(new String[3])
+        )));
+
+        System.out.println(userGeoService.removeUserGeo("董卓-泰美国际"));
+
+        System.out.println(JSON.toJSONString(userGeoService.getUserPos(
+                Arrays.asList("吕布-晓城天地", "董卓-泰美国际", "xxx").toArray(new String[3])
         )));
     }
 }

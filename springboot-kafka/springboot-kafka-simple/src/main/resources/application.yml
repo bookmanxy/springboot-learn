@@ -1,0 +1,31 @@
+server:
+  port: 8005
+kafka:
+  #  消费者
+  consumer:
+    servers: 127.0.0.1:9092
+    auto:
+      commit:
+        interval: 100
+      offset:
+        reset: earliest
+    session:
+      timeout: 20000
+    enable:
+      auto:
+        commit: false
+    group:
+      id: kafka_tangbaMaster_10
+    concurrency: 1
+  #    生产者
+  producer:
+    servers: 127.0.0.1:9092
+    retries: 0
+    linger: 1
+    batch:
+      size: 4096
+    buffer:
+      memory: 40960
+
+
+bootstrap-servers: 127.0.0.1:9092
