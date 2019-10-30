@@ -4,11 +4,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -54,5 +53,29 @@ public class SimpleApplicationTests {
 //        HashOperations hashOperations = redisTemplate.opsForHash();
     }
 
+    private final String RANG_KEY = "rang_key";
+//    @Autowired
+//    private StringRedisTemplate redisTemplate;
+    @Test
+    public void tryGetLockTest(){
+        ZSetOperations zSetOperations = redisTemplate.opsForZSet();
+        zSetOperations.add(RANG_KEY,"刘备",120);
+        zSetOperations.add(RANG_KEY,"张飞",55.89);
+        zSetOperations.add(RANG_KEY,"关羽",120);
+        zSetOperations.add(RANG_KEY,"曹操",59.6);
+        zSetOperations.add(RANG_KEY,"孙权",28);
+
+//        Set<String> set = zSetOperations.range(RANG_KEY,0,5);
+//        System.out.println(set);
+        Set<ZSetOperations.TypedTuple<String>> set2 = zSetOperations.rangeWithScores(RANG_KEY,0,6);
+//        for(ZSetOperations.TypedTuple<String> sub : set2){
+//            System.out.println(sub.getValue() + ":"+sub.getScore());
+//        }
+
+        set2 = zSetOperations.reverseRangeWithScores(RANG_KEY,0,6);
+        for(ZSetOperations.TypedTuple<String> sub : set2){
+            System.out.println(sub.getValue() + ":"+sub.getScore());
+        }
+    }
 
 }

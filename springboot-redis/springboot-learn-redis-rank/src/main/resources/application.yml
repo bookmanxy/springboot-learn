@@ -1,0 +1,20 @@
+server:
+  port: 8099
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 50
+        max-wait: 3000
+        max-idle: 20
+        min-idle: 2
+    timeout: 500
