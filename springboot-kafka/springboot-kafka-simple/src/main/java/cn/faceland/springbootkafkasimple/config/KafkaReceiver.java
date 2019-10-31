@@ -13,7 +13,7 @@ import java.io.IOException;
 @Component
 public class KafkaReceiver {
 //    @KafkaListener(topics = {"${kafka.consumer.topic}"})
-    @KafkaListener(topics = "result_ok")
+    @KafkaListener(topics = "result_ok2")
     public void listen0(ConsumerRecord<?, ?> record) throws IOException {
         String value = (String) record.value();
         System.out.println("我是topic小助手[result_ok]======我消费了=====" + value);

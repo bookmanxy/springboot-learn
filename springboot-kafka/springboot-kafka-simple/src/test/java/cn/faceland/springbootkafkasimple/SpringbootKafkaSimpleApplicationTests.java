@@ -28,9 +28,11 @@ class SpringbootKafkaSimpleApplicationTests {
      */
     @Test
     void testSendToKafka() {
-        String topic = "result_ok";
-        String msg = "我是大英雄";
-        KafkaMqUtil.sendMsg(kafkaTemplate,topic, msg);
+        for(int i = 0 ; i < 20 ; i ++){
+            String topic = "result_ok2";
+            String msg = "我是大英雄" + i;
+            KafkaMqUtil.sendMsg(kafkaTemplate,topic, msg);
+        }
     }
 
     @Test
