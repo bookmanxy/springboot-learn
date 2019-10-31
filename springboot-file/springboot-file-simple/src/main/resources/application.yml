@@ -5,3 +5,9 @@ logging:
   level:
     root: INFO
 
+spring:
+  servlet:
+    multipart:
+      enabled: true  # 控制是否能够文件上传
+      max-file-size: 30MB  # 1 , 1KB , 1MB
+      max-request-size: 30MB

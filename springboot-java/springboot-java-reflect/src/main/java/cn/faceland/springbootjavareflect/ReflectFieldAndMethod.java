@@ -1,7 +1,6 @@
 package cn.faceland.springbootjavareflect;
 
 import cn.faceland.springbootjavareflect.entity.SportHealthstep48Hour;
-import cn.faceland.springbootjavareflect.entity.Step48Vo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

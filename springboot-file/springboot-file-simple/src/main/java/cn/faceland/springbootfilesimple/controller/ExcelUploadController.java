@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping(value="/excel")
 @Slf4j
-public class ExampleUploadController{
+public class ExcelUploadController {
     @Autowired
     private ExcelService excelService;
 
