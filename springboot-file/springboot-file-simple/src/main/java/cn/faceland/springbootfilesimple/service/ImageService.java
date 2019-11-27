@@ -9,4 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface ImageService {
     ResultBean imageUpload(MultipartFile file);
+
+    ResultBean mergeImgs(String imgUrls);
 }

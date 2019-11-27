@@ -3,6 +3,7 @@ package cn.faceland.springbootfilesimple.controller;
 import cn.faceland.springbootfilesimple.service.ExcelService;
 import cn.faceland.springbootfilesimple.service.ImageService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,5 +29,14 @@ public class ImageUploadController {
             return new ResultBean(false,-1,"上传失败，请选择图片");
         }
         return imageService.imageUpload(file);
+    }
+
+    @RequestMapping("/mergeImgs")
+    public ResultBean mergeImgs(String imgUrls) {
+        log.debug("多张图合并成一张图");
+        if (StringUtils.isBlank(imgUrls)) {
+            return new ResultBean(false,-1,"请传图片地址");
+        }
+        return imageService.mergeImgs(imgUrls);
     }
 }
