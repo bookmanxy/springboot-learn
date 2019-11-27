@@ -120,7 +120,7 @@ public class ImageUtil {
 				g.drawImage(bufferedImages.get(7), 3*3+imageWidth*2, 3*3+imageWidth*2, null);
 				break;
 			case 9:
-				g.drawImage(bufferedImages.get(1), 3, 3, null);
+				g.drawImage(bufferedImages.get(0), 3, 3, null);
 				g.drawImage(bufferedImages.get(1), 3*2+imageWidth, 3, null);
 				g.drawImage(bufferedImages.get(2), 3*3+imageWidth*2, 3, null);
 				g.drawImage(bufferedImages.get(3), 3, 2*3+imageWidth, null);
