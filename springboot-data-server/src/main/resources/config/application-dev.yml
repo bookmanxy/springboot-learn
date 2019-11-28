@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    include: dev-druid
+logging:
+  file: ./logs/data1.log
+  level:
+    root: info
+    cn.faceland: debug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8099/eureka/
+    register-with-eureka: true   #开发环境中不注册到注册中心
+    fetch-registry: true      #开发环境中不注册到注册中心
+
+
+

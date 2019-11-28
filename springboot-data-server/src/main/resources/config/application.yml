@@ -1,0 +1,26 @@
+server:
+  port: 6201
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  application:
+    name: data1Server
+  profiles:
+    active: dev #dev,test,prod三种配置一键切换
+
+#eureka server上点击是展示的项目信息
+info:
+  contact:
+    mail: data1Server@qq.com
+    phone: xxxx
+    name: data1
+
+
+
+
+
+
+
