@@ -37,5 +37,5 @@ public interface CoreService {
      *
      * @return
      */
-    InsertVo insertParamToVo(List<ColumnVo> list);
+    InsertVo insertParamToVo(List<ColumnVo> list, Integer mode);
 }

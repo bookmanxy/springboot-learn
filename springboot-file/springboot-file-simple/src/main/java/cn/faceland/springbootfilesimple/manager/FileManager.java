@@ -4,6 +4,7 @@ import cn.faceland.springbootfilesimple.controller.ResultBean;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author watermelon on 2019/10/31 16:31
@@ -34,4 +35,16 @@ public interface FileManager {
      * @return
      */
     String getJarPath(String dir);
+
+    /**
+     * 阅读文件的每一行
+     * @param filePath
+     * @return
+     */
+    List<String> readLines(String filePath);
+
+    /**
+     * 读取文件并一行一行
+     */
+    void readFileLinesTest();
 }
