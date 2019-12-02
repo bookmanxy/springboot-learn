@@ -38,6 +38,7 @@ public interface FileManager {
 
     /**
      * 阅读文件的每一行
+     * 参考：https://blog.csdn.net/super_master_/article/details/80285815
      * @param filePath
      * @return
      */
@@ -45,6 +46,7 @@ public interface FileManager {
 
     /**
      * 读取文件并一行一行
+     * map的循环打开方式  https://blog.csdn.net/jianxia801/article/details/81540889
      */
     void readFileLinesTest();
 }

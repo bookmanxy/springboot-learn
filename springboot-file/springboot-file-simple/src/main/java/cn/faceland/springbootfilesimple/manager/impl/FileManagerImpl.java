@@ -161,7 +161,8 @@ public class FileManagerImpl implements FileManager {
         String time = "";
         String uriOrgi = "";
         Integer times = 0;
-        List<String> list = readLines("F:/download/access.log");
+//        List<String> list = readLines("F:/download/access.log");
+        List<String> list = readLines("C:/Users/99401/Documents/WeChat Files/huzhoudexy/FileStorage/File/2019-12/access.122.log");
         for(String line : list){
 
 //            System.out.println(line);
@@ -207,14 +208,17 @@ public class FileManagerImpl implements FileManager {
         Integer uriTimes = 0;
         while (it.hasNext()){
             Map.Entry<String, Integer> item = it.next();
-//            if(item.getValue() >=1 && (item.getKey().contains("2019:08:2") || item.getKey().contains("2019:08:3"))){
-            if(item.getValue() >=1){
+            if(item.getValue() >=1 && (item.getKey().contains("2019:06:") || item.getKey().contains("2019:06:"))){
+//            if(item.getValue() >=1){
 
-//                System.out.println(item.getKey() + "   :  " + item.getValue());
+                System.out.println(item.getKey() + "   :  " + item.getValue());
 
                 recordItem = map2.get(item.getKey());
                 for(String uri : recordItem.getUris()){
-//                    System.out.println("       " + uri);
+//                    if(uri.contains("loadKeepTangUsersList")){
+//                        System.out.println("       " + uri);
+//                    }
+                    System.out.println("       " + uri);
 
                     if(uri.contains("?")&&uri.contains("/tang")){
                         uriKey = uri.substring(uri.indexOf("/tang") + 5, uri.indexOf("?"));
@@ -231,9 +235,9 @@ public class FileManagerImpl implements FileManager {
             }
         }
 
-        for(String key : map3.keySet()){
-            System.out.println(key + "   :  " + map3.get(key));
-        }
+//        for(String key : map3.keySet()){
+//            System.out.println(key + "   :  " + map3.get(key));
+//        }
     }
 
     @Data
