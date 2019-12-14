@@ -1,6 +1,5 @@
 package cn.faceland.springbootjwt.util;
 
-import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -12,6 +11,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -195,11 +195,12 @@ jti(JWT ID)：是JWT的唯一标识。
     public static String updateToken(DecodedJWT jwt) {
         //StaticLog.info("from {},accountId:{}",jwt.getClaim("from").asString(),jwt.getClaim("accountId").asString());
         Date expireTime = jwt.getExpiresAt();
-        long expireMillis = DateUtil.millsecond(expireTime);
+        long expireMillis = transDateToMillsecond(expireTime);
         Date signTime = jwt.getIssuedAt();
-        long signMillis = DateUtil.millsecond(signTime);
+        long signMillis = transDateToMillsecond(signTime);
         long now = System.currentTimeMillis();
-        double a = (expireMillis - signMillis) *1.0 / (expireMillis - now);
+//        double a = (expireMillis - signMillis) *1.0 / (expireMillis - now);
+        double a = (now - signMillis) *1.0 / (expireMillis - signMillis);
         if(a>=0.5){
             return createToken(jwt.getClaim("from").asString(),jwt.getClaim("user_id").asString());
         }
@@ -219,4 +220,9 @@ jti(JWT ID)：是JWT的唯一标识。
 
     }
 
+    public static long transDateToMillsecond(Date date){
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(date);
+        return calendar1.getTimeInMillis() ;
+    }
 }
