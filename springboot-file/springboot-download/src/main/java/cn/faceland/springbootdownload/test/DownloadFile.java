@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static cn.faceland.springbootdownload.constants.StringConstants.VIDEO_URL;
+
 /**
  * @author watermelon
  * @Date 2019-12-12
@@ -50,6 +52,8 @@ public class DownloadFile {
     }
 
     public static void main(String[] args) {
-        httpDownload("https://cloud.video.taobao.com/play/u/2204066007433/p/2/e/6/t/1/231529647869.mp4?appKey=38829","D:\\me.mp4");
+        String url = VIDEO_URL;
+//        httpDownload("https://cloud.video.taobao.com/play/u/2204066007433/p/2/e/6/t/1/231529647869.mp4?appKey=38829","D:\\me.mp4");
+        httpDownload(url,"D:\\video\\me.mp4");
     }
 }
