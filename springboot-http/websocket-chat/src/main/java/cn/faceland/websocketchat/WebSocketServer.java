@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author watermelon
  * @Date 2020-01-08
- * @Description
+ * @Description 参考：博客园  https://www.cnblogs.com/yangxiaohui227/p/11077172.html
  */
 @ServerEndpoint("/websocket/{name}")
 @RestController

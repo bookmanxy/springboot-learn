@@ -14,7 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 /**
  * @author watermelon
  * @Date 2020-01-08
- * @Description
+ * @Description  参考 博客园 https://www.cnblogs.com/wqcoding/p/9672956.html
  */
 @ServerEndpoint("/websocket2")
 public class WebScoketServer2 {
